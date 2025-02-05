@@ -1,0 +1,780 @@
+[gd_scene load_steps=34 format=3 uid="uid://bdmicj7rf75w0"]
+
+[ext_resource type="Theme" uid="uid://x3nfxhbnl151" path="res://plant_theme.tres" id="1_qsin5"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantMain.cs" id="2_m87b1"]
+[ext_resource type="AudioStream" uid="uid://1q7m7xg4qlo0" path="res://Audio/click.wav" id="3_w7728"]
+[ext_resource type="Texture2D" uid="uid://dhka5a5aajsig" path="res://Image/Plants/BackgroundTree.png" id="4_i67bi"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantFileManager.cs" id="5_v7n2d"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantSettings.cs" id="6_bmme7"]
+[ext_resource type="FontFile" uid="uid://b5l1gbcec38jr" path="res://汉仪夏日体.ttf" id="7_3w2kk"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantJsonTree.cs" id="10_ddynj"]
+[ext_resource type="Script" path="res://Scripts/Plants/LinkedButtonManager.cs" id="11_5pdk5"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantEditorManager.cs" id="12_gt3dr"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantToolsManager.cs" id="13_cp8q8"]
+[ext_resource type="Texture2D" uid="uid://bwlqemtasexvi" path="res://Image/Plants/SeedChooser_Button2.png" id="14_xrfu5"]
+[ext_resource type="Texture2D" uid="uid://c0bdj1r53oqvh" path="res://Image/Plants/SeedChooser_Button2_Glow.png" id="15_tjk4b"]
+[ext_resource type="FontFile" uid="uid://ddtps1adgghau" path="res://fira_code.ttf" id="16_ssqbw"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantGenericEdit.cs" id="17_yiq2h"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantInfoDeliver.cs" id="18_6mglh"]
+[ext_resource type="Texture2D" uid="uid://bs7npcvr681o4" path="res://Image/Plants/Squalour.png" id="19_auq6g"]
+[ext_resource type="Texture2D" uid="uid://j8o8hft2b7t5" path="res://Image/Plants/MadSqualour.png" id="20_3n5bi"]
+[ext_resource type="Script" path="res://Scripts/Plants/Squalour.cs" id="21_c54td"]
+[ext_resource type="Script" path="res://Scripts/Plants/PlantSceneChanger.cs" id="21_v5d4o"]
+[ext_resource type="Texture2D" uid="uid://ugkjl1xb0man" path="res://Image/Plants/Starryfly.png" id="22_fotyf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3b3nn"]
+bg_color = Color(0.988235, 0.776471, 0.537255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.560784, 0.262745, 0.105882, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="InputEventKey" id="InputEventKey_vwrqk"]
+device = -1
+ctrl_pressed = true
+keycode = 78
+
+[sub_resource type="Shortcut" id="Shortcut_7ygh7"]
+events = [SubResource("InputEventKey_vwrqk")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_filbx"]
+device = -1
+ctrl_pressed = true
+keycode = 68
+
+[sub_resource type="Shortcut" id="Shortcut_wtpoh"]
+events = [SubResource("InputEventKey_filbx")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_8xpso"]
+device = -1
+ctrl_pressed = true
+keycode = 73
+
+[sub_resource type="Shortcut" id="Shortcut_7orf6"]
+events = [SubResource("InputEventKey_8xpso")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_7227w"]
+device = -1
+command_or_control_autoremap = true
+keycode = 71
+
+[sub_resource type="Shortcut" id="Shortcut_wmw00"]
+events = [SubResource("InputEventKey_7227w")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rc6ol"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v80oh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bmbp2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="PlantMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_qsin5")
+script = ExtResource("2_m87b1")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_w7728")
+volume_db = -10.0
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+color = Color(1, 0.820804, 0.618377, 1)
+
+[node name="BackgroundTree" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -440.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+focus_mode = 1
+mouse_filter = 0
+texture = ExtResource("4_i67bi")
+flip_h = true
+
+[node name="Inside" type="MarginContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 9
+
+[node name="VBox" type="VBoxContainer" parent="Inside"]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="Inside/VBox"]
+layout_mode = 2
+
+[node name="文件" type="PopupMenu" parent="Inside/VBox/MenuBar"]
+item_count = 3
+item_0/text = "打开"
+item_1/text = "保存"
+item_1/id = 1
+item_2/text = "另存为"
+item_2/id = 2
+script = ExtResource("5_v7n2d")
+
+[node name="设置" type="PopupMenu" parent="Inside/VBox/MenuBar"]
+size = Vector2i(130, 100)
+hide_on_checkable_item_selection = false
+item_count = 1
+item_0/text = "启用音效"
+item_0/checkable = 1
+item_0/checked = true
+script = ExtResource("6_bmme7")
+
+[node name="打开" type="FileDialog" parent="Inside/VBox/MenuBar"]
+title = "Open a File"
+initial_position = 4
+size = Vector2i(338, 179)
+ok_button_text = "Open"
+cancel_button_text = "取消"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="另存为" type="FileDialog" parent="Inside/VBox/MenuBar"]
+auto_translate_mode = 1
+title = "另存为..."
+initial_position = 4
+size = Vector2i(338, 179)
+ok_button_text = "保存"
+cancel_button_text = "取消"
+access = 2
+filters = PackedStringArray("*.json")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="WorkPlace" type="HSplitContainer" parent="Inside/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 300
+
+[node name="JsonTree" type="VBoxContainer" parent="Inside/VBox/WorkPlace"]
+layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="Inside/VBox/WorkPlace/JsonTree"]
+layout_mode = 2
+tooltip_text = "搜索植物，序号或名称均有效
+在搜索内容前加“@”改为全局搜索，简介等内容也有效"
+theme_override_fonts/font = ExtResource("7_3w2kk")
+placeholder_text = " 搜索..."
+caret_blink = true
+
+[node name="Tree" type="Tree" parent="Inside/VBox/WorkPlace/JsonTree"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+script = ExtResource("10_ddynj")
+
+[node name="LinkBackground" type="Panel" parent="Inside/VBox/WorkPlace/JsonTree"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme_override_styles/panel = SubResource("StyleBoxFlat_3b3nn")
+
+[node name="Margin" type="MarginContainer" parent="Inside/VBox/WorkPlace/JsonTree/LinkBackground"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="VBox" type="VBoxContainer" parent="Inside/VBox/WorkPlace/JsonTree/LinkBackground/Margin"]
+layout_mode = 2
+
+[node name="LinkTips" type="Label" parent="Inside/VBox/WorkPlace/JsonTree/LinkBackground/Margin/VBox"]
+layout_mode = 2
+tooltip_text = "与该植物相关的植物
+“融合配方”的优先级最高，在搜索时只会显示搜索结果中的相关项。"
+mouse_filter = 0
+text = "相关植物"
+horizontal_alignment = 1
+
+[node name="LinkedPlants" type="HFlowContainer" parent="Inside/VBox/WorkPlace/JsonTree/LinkBackground/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 7
+theme_override_constants/v_separation = 4
+script = ExtResource("11_5pdk5")
+
+[node name="Editor" type="VBoxContainer" parent="Inside/VBox/WorkPlace"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = ExtResource("12_gt3dr")
+
+[node name="tools" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+script = ExtResource("13_cp8q8")
+
+[node name="新建" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+tooltip_text = "新建一个植物，seedType默认为当前选中大类的最后一项+1，若没有选中则为最后一个"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_7ygh7")
+texture_normal = ExtResource("14_xrfu5")
+texture_pressed = ExtResource("14_xrfu5")
+texture_hover = ExtResource("15_tjk4b")
+texture_focused = ExtResource("15_tjk4b")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/新建"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 1
+text = "新建"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="删除" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+tooltip_text = "删除当前植物"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_wtpoh")
+texture_normal = ExtResource("14_xrfu5")
+texture_pressed = ExtResource("14_xrfu5")
+texture_hover = ExtResource("15_tjk4b")
+texture_focused = ExtResource("15_tjk4b")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/删除"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 1
+text = "删除"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="应用" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+tooltip_text = "确认更改"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_7orf6")
+texture_normal = ExtResource("14_xrfu5")
+texture_pressed = ExtResource("14_xrfu5")
+texture_hover = ExtResource("15_tjk4b")
+texture_focused = ExtResource("15_tjk4b")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/应用"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 1
+text = "应用"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="重置" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+tooltip_text = "将此植物恢复到上一次保存时的状态"
+mouse_default_cursor_shape = 2
+action_mode = 0
+shortcut = SubResource("Shortcut_wmw00")
+texture_normal = ExtResource("14_xrfu5")
+texture_pressed = ExtResource("14_xrfu5")
+texture_hover = ExtResource("15_tjk4b")
+texture_focused = ExtResource("15_tjk4b")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/重置"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 18
+text = "重置该植物"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="新建并复制" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+tooltip_text = "新建一个植物，并且将当前植物的信息复制过去，seedType, name除外"
+mouse_default_cursor_shape = 2
+action_mode = 0
+shortcut = SubResource("Shortcut_wmw00")
+texture_normal = ExtResource("14_xrfu5")
+texture_pressed = ExtResource("14_xrfu5")
+texture_hover = ExtResource("15_tjk4b")
+texture_focused = ExtResource("15_tjk4b")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/新建并复制"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 18
+text = "新建并复制"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="确认删除" type="ConfirmationDialog" parent="Inside/VBox/WorkPlace/Editor/tools"]
+title = "确认删除？"
+initial_position = 2
+size = Vector2i(216, 100)
+ok_button_text = "确认"
+dialog_text = "一旦删除将永远失去这株植物（真的很久）！"
+dialog_autowrap = true
+cancel_button_text = "取消"
+
+[node name="确认重置" type="ConfirmationDialog" parent="Inside/VBox/WorkPlace/Editor/tools"]
+title = "确认重置？"
+ok_button_text = "确认"
+dialog_text = "该植物将恢复到上次保存的状态
+此操作不可撤回！"
+cancel_button_text = "取消"
+
+[node name="Tips" type="Label" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("7_3w2kk")
+text = "* 选填，留空会在保存时自动去除"
+vertical_alignment = 1
+
+[node name="seedType" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="seedType" type="Label" parent="Inside/VBox/WorkPlace/Editor/seedType"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_ssqbw")
+text = " seedType"
+horizontal_alignment = 2
+
+[node name="seedTypeEdit" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/seedType"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>植物编号...</color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/seedType/seedTypeEdit"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="name" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="name" type="Label" parent="Inside/VBox/WorkPlace/Editor/name"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_ssqbw")
+text = "     name"
+horizontal_alignment = 2
+
+[node name="nameEdit" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/name"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>植物名称...</color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/name/nameEdit"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="introduce" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="introduce" type="Label" parent="Inside/VBox/WorkPlace/Editor/introduce"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_ssqbw")
+text = "introduce"
+horizontal_alignment = 2
+
+[node name="introduceEdit" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/introduce"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>宝开语...</color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/introduce/introduceEdit"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="info" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="info" type="Label" parent="Inside/VBox/WorkPlace/Editor/info"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("16_ssqbw")
+text = "     info"
+horizontal_alignment = 2
+
+[node name="Infos" type="VBoxContainer" parent="Inside/VBox/WorkPlace/Editor/info"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+script = ExtResource("18_6mglh")
+
+[node name="简介" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/Infos"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>简介...</color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/Infos/简介"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+text = "简介"
+
+[node name="特点" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/Infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>特点*...</color><color=red></color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/Infos/特点"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="韧性" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/Infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>韧性*...</color><color=red></color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/Infos/韧性"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="伤害" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/Infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>伤害*...</color><color=red></color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/Infos/伤害"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="其他" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/Infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "其他* ..."
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/Infos/其他"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="融合配方" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/Infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "<color=#3D1400>融合配方*...</color><color=red></color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/Infos/融合配方"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="cost" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="info" type="Label" parent="Inside/VBox/WorkPlace/Editor/cost"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("16_ssqbw")
+text = "     cost"
+horizontal_alignment = 2
+
+[node name="costEdit" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/cost"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "花费*...<color=red></color>
+冷却时间*...<color=red></color>"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("17_yiq2h")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/cost/costEdit"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("7_3w2kk")
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+bbcode_enabled = true
+
+[node name="Squalour" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -200.0
+offset_right = 336.0
+offset_bottom = 234.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 0.139626
+scale = Vector2(0.286, 0.286)
+texture_normal = ExtResource("19_auq6g")
+texture_pressed = ExtResource("19_auq6g")
+texture_disabled = ExtResource("20_3n5bi")
+flip_h = true
+script = ExtResource("21_c54td")
+
+[node name="Mad" type="RichTextLabel" parent="Squalour"]
+layout_mode = 0
+offset_left = -476.643
+offset_top = 201.161
+offset_right = 36.357
+offset_bottom = 317.161
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/bold_font = ExtResource("7_3w2kk")
+theme_override_font_sizes/normal_font_size = 100
+theme_override_font_sizes/bold_font_size = 100
+theme_override_styles/fill = SubResource("StyleBoxFlat_rc6ol")
+theme_override_styles/background = SubResource("StyleBoxFlat_v80oh")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bmbp2")
+bbcode_enabled = true
+text = "[color=#e097ae][b]永不红温！[/b][/color]"
+fit_content = true
+
+[node name="Starryfly" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -245.0
+offset_right = -101.0
+offset_bottom = -146.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -0.179716
+scale = Vector2(0.680845, 0.615732)
+texture = ExtResource("22_fotyf")
+flip_h = true
+
+[node name="SceneChange" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -143.0
+offset_top = 38.0
+offset_right = -32.0
+offset_bottom = 64.0
+grow_horizontal = 0
+tooltip_text = "转到僵尸编辑界面"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_xrfu5")
+texture_pressed = ExtResource("14_xrfu5")
+texture_hover = ExtResource("15_tjk4b")
+texture_focused = ExtResource("15_tjk4b")
+script = ExtResource("21_v5d4o")
+
+[node name="Label" type="Label" parent="SceneChange"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 1
+text = "转到僵尸"
+horizontal_alignment = 1
+vertical_alignment = 1

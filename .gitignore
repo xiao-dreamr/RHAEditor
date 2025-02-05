@@ -1,0 +1,15 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+*.json
+*.import
+*.exe
+*.pck
+*.7z
+data_RHAEditor_windows_x86_64/
+addons/
+.vscode/
+example.tscn
+code_highlighter.tres
+tree.gd
+TestTree.cs

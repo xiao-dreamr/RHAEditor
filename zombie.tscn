@@ -1,0 +1,516 @@
+[gd_scene load_steps=19 format=3 uid="uid://ber2k3iigyfuk"]
+
+[ext_resource type="Texture2D" uid="uid://cv4nysvor2lug" path="res://Image/Zombies/Background_Grave.png" id="1_1egdw"]
+[ext_resource type="Texture2D" uid="uid://yo1s8vdl6x4g" path="res://Image/Zombies/buttonsmall.png" id="1_c2ar7"]
+[ext_resource type="Theme" uid="uid://b1yyypp5cq5af" path="res://zombie_theme.tres" id="1_ut18t"]
+[ext_resource type="Texture2D" uid="uid://bhbbai2307dnc" path="res://Image/Zombies/GFish.png" id="2_2a2lw"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieMain.cs" id="2_2unib"]
+[ext_resource type="Texture2D" uid="uid://bxch1n64ogw35" path="res://Image/Zombies/lpp.png" id="2_wctql"]
+[ext_resource type="FontFile" uid="uid://ddtps1adgghau" path="res://fira_code.ttf" id="3_4d8bm"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieFileManager.cs" id="3_07i1y"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieJsonTree.cs" id="3_q0nu3"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieSettings.cs" id="4_i7qfj"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieEditorManager.cs" id="5_2sb88"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieToolsManager.cs" id="7_33313"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieGenericEditor.cs" id="8_l7eyl"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieInfoDeliver.cs" id="9_cj1y7"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieToolButton.cs" id="9_iiymo"]
+[ext_resource type="AudioStream" uid="uid://1q7m7xg4qlo0" path="res://Audio/click.wav" id="10_xhqko"]
+[ext_resource type="AudioStream" uid="uid://cdvwgu12ijxuh" path="res://Audio/gravebutton.wav" id="11_xl0mb"]
+[ext_resource type="Script" path="res://Scripts/Zombies/ZombieChangeScene.cs" id="18_gtq7p"]
+
+[node name="ZombieMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ut18t")
+script = ExtResource("2_2unib")
+
+[node name="BackGround" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+
+[node name="Inside" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 9
+
+[node name="VBox" type="VBoxContainer" parent="Inside"]
+layout_mode = 2
+
+[node name="MenuBar" type="MenuBar" parent="Inside/VBox"]
+layout_mode = 2
+
+[node name="文件" type="PopupMenu" parent="Inside/VBox/MenuBar"]
+auto_translate_mode = 1
+item_count = 3
+item_0/text = "打开"
+item_1/text = "保存"
+item_1/id = 1
+item_2/text = "另存为"
+item_2/id = 2
+script = ExtResource("3_07i1y")
+
+[node name="设置" type="PopupMenu" parent="Inside/VBox/MenuBar"]
+auto_translate_mode = 1
+size = Vector2i(130, 100)
+hide_on_checkable_item_selection = false
+item_count = 1
+item_0/text = "启用音效"
+item_0/checkable = 1
+item_0/checked = true
+script = ExtResource("4_i7qfj")
+
+[node name="打开" type="FileDialog" parent="Inside/VBox/MenuBar"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Open a File"
+initial_position = 4
+size = Vector2i(338, 179)
+ok_button_text = "Open"
+cancel_button_text = "取消"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="另存为" type="FileDialog" parent="Inside/VBox/MenuBar"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "另存为..."
+initial_position = 4
+size = Vector2i(338, 179)
+ok_button_text = "保存"
+cancel_button_text = "取消"
+access = 2
+filters = PackedStringArray("*.json")
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="WorkPlace" type="HSplitContainer" parent="Inside/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JsonTree" type="VBoxContainer" parent="Inside/VBox/WorkPlace"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Search" type="LineEdit" parent="Inside/VBox/WorkPlace/JsonTree"]
+layout_mode = 2
+placeholder_text = " 搜索..."
+
+[node name="Tree" type="Tree" parent="Inside/VBox/WorkPlace/JsonTree"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/draw_relationship_lines = 0
+hide_root = true
+scroll_horizontal_enabled = false
+script = ExtResource("3_q0nu3")
+
+[node name="Editor" type="VBoxContainer" parent="Inside/VBox/WorkPlace"]
+layout_mode = 2
+script = ExtResource("5_2sb88")
+
+[node name="tools" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+script = ExtResource("7_33313")
+
+[node name="新建" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_c2ar7")
+script = ExtResource("9_iiymo")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/新建"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "新建"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="删除" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_c2ar7")
+script = ExtResource("9_iiymo")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/删除"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "删除"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="应用" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_c2ar7")
+script = ExtResource("9_iiymo")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/应用"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "应用
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="重置" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_c2ar7")
+script = ExtResource("9_iiymo")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/重置"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "重置该僵尸"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="新建并复制" type="TextureButton" parent="Inside/VBox/WorkPlace/Editor/tools"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_c2ar7")
+script = ExtResource("9_iiymo")
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/tools/新建并复制"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "新建并复制"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="确认删除" type="ConfirmationDialog" parent="Inside/VBox/WorkPlace/Editor/tools"]
+title = "确认删除？"
+position = Vector2i(0, 36)
+ok_button_text = "确认"
+dialog_text = "一旦删除将永远失去这只姜丝（真的很久）！"
+dialog_autowrap = true
+cancel_button_text = "取消"
+
+[node name="确认重置" type="ConfirmationDialog" parent="Inside/VBox/WorkPlace/Editor/tools"]
+auto_translate_mode = 1
+title = "确认重置？"
+ok_button_text = "确认"
+dialog_text = "该僵尸将恢复到上次保存的状态
+此操作不可撤回！"
+cancel_button_text = "取消"
+
+[node name="tips" type="Label" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+text = "* 选填，留空会在保存时自动去除"
+
+[node name="theZombieType" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/theZombieType"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4d8bm")
+text = "theZombieType"
+
+[node name="CodeEdit" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/theZombieType"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "僵尸类型..."
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/theZombieType/CodeEdit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="name" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/name"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4d8bm")
+text = "        name "
+
+[node name="CodeEdit" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/name"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "僵尸名称..."
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/name/CodeEdit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="introduce" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/introduce"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_4d8bm")
+text = "   introduce "
+
+[node name="CodeEdit" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/introduce"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "宝开语..."
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/introduce/CodeEdit"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="info" type="HBoxContainer" parent="Inside/VBox/WorkPlace/Editor"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Inside/VBox/WorkPlace/Editor/info"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_4d8bm")
+text = "        info "
+
+[node name="infos" type="VBoxContainer" parent="Inside/VBox/WorkPlace/Editor/info"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("9_cj1y7")
+
+[node name="简介" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "简介......"
+wrap_mode = 1
+scroll_fit_content_height = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/infos/简介"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="伤害" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "（子弹）伤害*..."
+wrap_mode = 1
+scroll_fit_content_height = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/infos/伤害"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="韧性" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "韧性..."
+wrap_mode = 1
+scroll_fit_content_height = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/infos/韧性"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="特点" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "特点*..."
+wrap_mode = 1
+scroll_fit_content_height = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/infos/特点"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="其他" type="CodeEdit" parent="Inside/VBox/WorkPlace/Editor/info/infos"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "其他*..."
+wrap_mode = 1
+scroll_fit_content_height = true
+script = ExtResource("8_l7eyl")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Inside/VBox/WorkPlace/Editor/info/infos/其他"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+mouse_filter = 1
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+
+[node name="BackgroundGrave" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_1egdw")
+
+[node name="lpp" type="TextureRect" parent="BackgroundGrave"]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 354.0
+offset_right = 684.0
+offset_bottom = 457.0
+rotation = 0.318691
+texture = ExtResource("2_wctql")
+
+[node name="GFish" type="TextureRect" parent="BackgroundGrave"]
+layout_mode = 0
+offset_left = 411.0
+offset_top = 353.0
+offset_right = 1038.0
+offset_bottom = 982.0
+rotation = 0.139436
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_2a2lw")
+flip_h = true
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_xhqko")
+volume_db = -10.0
+
+[node name="GraveClick" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_xl0mb")
+volume_db = -10.0
+
+[node name="ChangeScene" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 33.0
+offset_right = -41.0
+offset_bottom = 81.0
+grow_horizontal = 0
+texture_normal = ExtResource("1_c2ar7")
+script = ExtResource("18_gtq7p")
+
+[node name="Label" type="Label" parent="ChangeScene"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "转到植物"
+horizontal_alignment = 1
+vertical_alignment = 1
