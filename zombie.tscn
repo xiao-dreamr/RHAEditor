@@ -70,10 +70,14 @@ script = ExtResource("3_07i1y")
 auto_translate_mode = 1
 size = Vector2i(130, 100)
 hide_on_checkable_item_selection = false
-item_count = 1
+item_count = 2
 item_0/text = "启用音效"
 item_0/checkable = 1
 item_0/checked = true
+item_1/text = "启用自动应用"
+item_1/checkable = 1
+item_1/checked = true
+item_1/id = 1
 script = ExtResource("4_i7qfj")
 
 [node name="打开" type="FileDialog" parent="Inside/VBox/MenuBar"]

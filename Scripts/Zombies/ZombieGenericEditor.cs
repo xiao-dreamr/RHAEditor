@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class ZombieGenericEditor : CodeEdit
 {
@@ -9,14 +10,14 @@ public partial class ZombieGenericEditor : CodeEdit
 	{
 		tools = GetNode<ZombieToolsManager>("/root/ZombieMain/Inside/VBox/WorkPlace/Editor/tools");
 		rtl = GetNode<RichTextLabel>("./RichTextLabel");
-		OnEditFinished();
+		Display();
 		FocusEntered += OnRichFocusEntered;
 		FocusExited += OnEditFinished;
 		tools.Deleted += OnDeletePressed;
 		GuttersDrawLineNumbers = true;
 	}
 
-	public void OnEditFinished()
+	public void Display()
 	{
 		if (Text == PlaceholderText.Replace("*...", "："))
 		{
@@ -27,6 +28,15 @@ public partial class ZombieGenericEditor : CodeEdit
 		rtl.Visible = true;
 		// 若此处有文本，则替换掉<和>符号并显示，否则显示默认
 		rtl.Text = Text.Length > 0 ? Text.Replace("<", "[").Replace(">", "]").Replace("3D1400", "FAFAFA") : PlaceholderText.Replace("3D1400", "FAFAFA").Replace("<", "[").Replace(">", "]");
+	}
+	public void OnEditFinished()
+	{
+		Display();
+		if (ZombieMain.AutoApply && Text.Length > 0)
+		{
+			Debug.WriteLine("自动应用！");
+			GetNode<ZombieToolsManager>("/root/ZombieMain/Inside/VBox/WorkPlace/Editor/tools").ApplyPressed();
+		}
 	}
 	public void OnRichFocusEntered()
 	{

@@ -26,9 +26,9 @@ public partial class ZombieEditorManager : VBoxContainer
 		theZombieTypeEditor.Text = zombieType.ToString();
 		nameEditor.Text = zombie.name;
 		introduceEditor.Text = zombie.introduce;
-		theZombieTypeEditor.OnEditFinished();
-		nameEditor.OnEditFinished();
-		introduceEditor.OnEditFinished();
+		theZombieTypeEditor.Display();
+		nameEditor.Display();
+		introduceEditor.Display();
 		infos.DeliverInfo(zombie.info);
 	}
 

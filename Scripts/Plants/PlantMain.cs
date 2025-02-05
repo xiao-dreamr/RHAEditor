@@ -206,6 +206,7 @@ public partial class PlantMain : Control
 	static public List<Plant> savedPlants = new();
 	static public PlantsManager PlantManager = new();
 	static public string filePath = "";
+	static public bool AutoApply = true;
 	static public void CreateErrorWindow(Node parent, string message)
 	{
 		AcceptDialog Tips = new()

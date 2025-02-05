@@ -31,16 +31,16 @@ public partial class PlantInfoDeliver : VBoxContainer
 		简介.Text = string.Empty;
 		if (infos.Length == 0)
 		{
-			简介.OnEditFinished();
-			其他.OnEditFinished();
-			特点.OnEditFinished();
-			韧性.OnEditFinished();
-			伤害.OnEditFinished();
-			配方.OnEditFinished();
+			简介.Display();
+			其他.Display();
+			特点.Display();
+			韧性.Display();
+			伤害.Display();
+			配方.Display();
 			return;
 		}
 		简介.Text = infos[0];
-		简介.OnEditFinished();
+		简介.Display();
 		foreach (string s in infos.Skip(1))
 		{
 			if (s.Contains("特点："))
@@ -69,11 +69,11 @@ public partial class PlantInfoDeliver : VBoxContainer
 				others += s + "\n";
 			}
 			其他.Text = others.TrimEnd('\n');
-			其他.OnEditFinished();
-			特点.OnEditFinished();
-			韧性.OnEditFinished();
-			伤害.OnEditFinished();
-			配方.OnEditFinished();
+			其他.Display();
+			特点.Display();
+			韧性.Display();
+			伤害.Display();
+			配方.Display();
 		}
 	}
 }

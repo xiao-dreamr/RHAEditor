@@ -189,6 +189,7 @@ public partial class ZombieMain : Control
 			this.zombies = zombies;
 		}
 	}
+	static public bool AutoApply = true;
 	static public ZombieManager zombieManager = new();
 	static public List<Zombie> savedZombies = new();
 	static public string filePath = "";

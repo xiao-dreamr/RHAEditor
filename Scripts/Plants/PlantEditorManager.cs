@@ -22,13 +22,13 @@ public partial class PlantEditorManager : VBoxContainer
 		// 选中植物后，将其信息填入相应的编辑框中
 		Plant plant = PlantMain.PlantManager.plants.Find(x => x.seedType == seedType);
 		seedTypeEdit.Text = seedType.ToString();
-		seedTypeEdit.OnEditFinished();
+		seedTypeEdit.Display();
 		nameEdit.Text = plant.name;
-		nameEdit.OnEditFinished();
+		nameEdit.Display();
 		introduceEdit.Text = plant.introduce;
-		introduceEdit.OnEditFinished();
+		introduceEdit.Display();
 		costEdit.Text = plant.cost.ToString();
-		costEdit.OnEditFinished();
+		costEdit.Display();
 		infos.DiliverInfo(seedType);
 	}
 }

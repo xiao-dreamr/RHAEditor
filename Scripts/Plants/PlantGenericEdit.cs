@@ -9,19 +9,14 @@ public partial class PlantGenericEdit : CodeEdit
 	{
 		tools = GetNode<PlantToolsManager>("/root/PlantMain/Inside/VBox/WorkPlace/Editor/tools");
 		rtl = GetNode<RichTextLabel>("./RichTextLabel");
-		OnEditFinished();
+		Display();
 		FocusEntered += OnRichFocusEntered;
 		FocusExited += OnEditFinished;
 		tools.Deleted += OnDeletePressed;
 		GuttersDrawLineNumbers = true;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-	public void OnEditFinished()
+	public void Display()
 	{
 		if (Text == PlaceholderText.Replace("*...", "："))
 		{
@@ -32,6 +27,15 @@ public partial class PlantGenericEdit : CodeEdit
 		rtl.Visible = true;
 		// 若此处有文本，则替换掉<和>符号并显示，否则显示默认
 		rtl.Text = Text.Length > 0 ? Text.Replace("<", "[").Replace(">", "]") : PlaceholderText.Replace("<", "[").Replace(">", "]");
+
+	}
+	public void OnEditFinished()
+	{
+		Display();
+		if (PlantMain.AutoApply && Text.Length > 0)
+		{
+			GetNode<PlantToolsManager>("/root/PlantMain/Inside/VBox/WorkPlace/Editor/tools").ApplyPressed();
+		}
 	}
 	public void OnRichFocusEntered()
 	{
