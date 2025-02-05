@@ -37,7 +37,7 @@ public partial class ZombieSettings : PopupMenu
 						SetItemChecked(1, false);
 						PlantMain.AutoApply = false;
 						ZombieMain.AutoApply = false;
-						SceneChanger.plantMain.GetNode<PopupMenu>("./Inside/VBox/MenuBar/设置").SetItemChecked(0, false);
+						SceneChanger.plantMain.GetNode<PopupMenu>("./Inside/VBox/MenuBar/设置").SetItemChecked(1, false);
 					}
 					else
 					{
@@ -45,7 +45,7 @@ public partial class ZombieSettings : PopupMenu
 						SetItemChecked(1, true);
 						PlantMain.AutoApply = true;
 						ZombieMain.AutoApply = true;
-						SceneChanger.plantMain.GetNode<PopupMenu>("./Inside/VBox/MenuBar/设置").SetItemChecked(0, true);
+						SceneChanger.plantMain.GetNode<PopupMenu>("./Inside/VBox/MenuBar/设置").SetItemChecked(1, true);
 					}
 					break;
 			}
