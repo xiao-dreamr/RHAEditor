@@ -1,13 +1,21 @@
-# <img src="./addons/SmoothScroll/class-icon.svg" alt="drawing" width="20" style="padding-top: 20px;"/>   SmoothScroll
- A customizable SmoothScrollContainer node for Godot
+# RHAE
+ 
+ 作者：B站[霖_er_](https://space.bilibili.com/502814741)
 
-[Watch video footage on Youtube](https://www.youtube.com/watch?v=B3GjqV2c6yQ)
+ 自制的融合版图鉴编辑器，学生党在空余时间做着玩的，功能并不全面，也不一定会更新，见谅~(￣▽￣)~*
 
-### How to use
-Activate the addon in the project settings' addon tab,
-Click the "+" button to add a new node and select "SmoothScrollContainer" instead "ScrollContainer".
-To add smooth scrollling to existing ScrollContainers, rightclick the node and select change type. Then select "SmoothScrollContainer".
+ ## 使用
 
-For smoother scrolling: In your project settings set _gui/common/snap_controls_to_pixels_ to _false_
+- 打开：右上角文件->打开->LawnStrings.json 或 ZombieString.json
+- 写入：右上角文件->保存 或 另存为
+- 编辑：
+    - 新建：在当前分类下的最后一位Id新建一个对象
+    - 应用：将当前改动同步到该对象（不是保存！）
+    - 删除：删除该对象
+    - 重置：将该对象重置到上一次保存
 
-`Mouse scroll icon by Greg Fiske from the Noun Project`
+> 注意！编辑时的改动只有在保存后才会写入json文件！
+
+## 实现
+
+有空再写（
